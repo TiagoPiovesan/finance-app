@@ -10,10 +10,16 @@ import {
   Fields,
   TransactionsTypes
 } from './styles'
-import { Input } from '../../components/Forms/Input'
 import { Button } from '../../components/Forms/Button'
 import TrasnsactionTypeButton from '../../components/Forms/TransactionTypeButton'
 import { CategorySelectButton } from '../../components/Forms/CategorySelectButton'
+import InputForm from '../../components/Forms/InputForm'
+import { useForm } from 'react-hook-form'
+
+interface FormData {
+  name: string;
+  amount: string;
+}
 
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
@@ -22,6 +28,11 @@ export function Register() {
     key: 'category',
     name: 'Categoria'
   });
+
+  const {
+    control,
+    handleSubmit
+  } = useForm();
 
   function handleTransactionsTypesSelect(type: 'up' | 'down') {
     setTransactionType(type)
@@ -35,6 +46,18 @@ export function Register() {
     setCategoryModalOpen(false)
   }
 
+  function handleRegister(form: FormData){
+    const data = {
+      name: form.name,
+      amount: form.amount,
+      transactionType,
+      category: category.key
+    }
+
+    console.log(data)
+
+  }
+
   return (
     <Container>
       <Header>
@@ -43,8 +66,18 @@ export function Register() {
 
       <Form>
         <Fields>
-          <Input placeholder='Nome'/>
-          <Input placeholder='Preço'/>
+
+          <InputForm
+            placeholder='Nome'
+            name="name"
+            control={control}
+          />
+          <InputForm
+            placeholder='Preço'
+            name="amount"
+            control={control}
+          />
+
           <TransactionsTypes>
             <TrasnsactionTypeButton
               title="Entrada"
@@ -66,7 +99,7 @@ export function Register() {
           />
         </Fields>
 
-        <Button title='Enviar' />
+        <Button title='Enviar' onPress={handleSubmit(handleRegister)} />
       </Form>
 
       <Modal visible={categoryModalOpen} animationType="slide" presentationStyle="pageSheet">
