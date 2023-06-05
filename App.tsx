@@ -30,7 +30,7 @@ export default function App() {
   return (
     <ThemeProvider theme={ theme }>
       <SafeAreaProvider >
-        <CategorySelect />
+        <Register />
       </SafeAreaProvider>
     </ThemeProvider>
   )
