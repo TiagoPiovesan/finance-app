@@ -20,13 +20,16 @@ export function AppRoutes(){
         tabBarStyle: {
           flexDirection: "row",
           paddingVertical: Platform.OS === 'ios' ? 10 : 0,
-          height: 88
+          height: 88,
         }
       }} >
       <Screen
         name="Listagem"
         component={Dashboard}
         options={{
+          tabBarLabelStyle: {
+            fontFamily: theme.fonts.medium
+          },
           tabBarIcon: (({ size, color }) => (
             <MaterialIcons
               name="format-list-bulleted"
@@ -40,6 +43,9 @@ export function AppRoutes(){
         name="Cadastrar"
         component={Register}
         options={{
+          tabBarLabelStyle: {
+            fontFamily: theme.fonts.medium
+          },
           tabBarIcon: (({ size, color }) => (
             <MaterialIcons
               name="attach-money"
@@ -53,6 +59,9 @@ export function AppRoutes(){
         name="Resumo"
         component={Register}
         options={{
+          tabBarLabelStyle: {
+            fontFamily: theme.fonts.medium
+          },
           tabBarBadge: 0,
           tabBarBadgeStyle: {
             backgroundColor: theme.colors.success
