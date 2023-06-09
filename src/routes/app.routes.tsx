@@ -17,6 +17,9 @@ export function AppRoutes(){
         tabBarActiveTintColor: theme.colors.secondary,
         tabBarInactiveTintColor: theme.colors.text,
         tabBarLabelPosition: 'beside-icon',
+        tabBarLabelStyle: {
+          fontFamily: theme.fonts.medium
+        },
         tabBarStyle: {
           flexDirection: "row",
           paddingVertical: Platform.OS === 'ios' ? 10 : 0,
@@ -27,9 +30,6 @@ export function AppRoutes(){
         name="Listagem"
         component={Dashboard}
         options={{
-          tabBarLabelStyle: {
-            fontFamily: theme.fonts.medium
-          },
           tabBarIcon: (({ size, color }) => (
             <MaterialIcons
               name="format-list-bulleted"
@@ -43,9 +43,6 @@ export function AppRoutes(){
         name="Cadastrar"
         component={Register}
         options={{
-          tabBarLabelStyle: {
-            fontFamily: theme.fonts.medium
-          },
           tabBarIcon: (({ size, color }) => (
             <MaterialIcons
               name="attach-money"
@@ -59,9 +56,6 @@ export function AppRoutes(){
         name="Resumo"
         component={Register}
         options={{
-          tabBarLabelStyle: {
-            fontFamily: theme.fonts.medium
-          },
           tabBarBadge: 0,
           tabBarBadgeStyle: {
             backgroundColor: theme.colors.success
