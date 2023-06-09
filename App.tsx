@@ -15,6 +15,8 @@ import {
   Poppins_500Medium,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins';
+import { AppRoutes } from './src/routes/app.routes';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,9 +31,11 @@ export default function App() {
 
   return (
     <ThemeProvider theme={ theme }>
-      <SafeAreaProvider >
-        <Register />
-      </SafeAreaProvider>
+      <NavigationContainer>
+        <SafeAreaProvider >
+          < AppRoutes />
+        </SafeAreaProvider>
+      </NavigationContainer>
     </ThemeProvider>
   )
 }

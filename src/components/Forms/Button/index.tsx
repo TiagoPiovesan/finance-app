@@ -1,9 +1,9 @@
 import React from 'react'
 import { Container, Title } from './styles'
+import { RectButtonProps } from 'react-native-gesture-handler'
 
-import { TouchableOpacityProps } from 'react-native/types'
 
-type Props = TouchableOpacityProps & { title: string }
+type Props = RectButtonProps & { title: string }
 
 export function Button({ title, ...rest }: Props) {
   return (

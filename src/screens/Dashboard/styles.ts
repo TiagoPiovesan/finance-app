@@ -4,6 +4,7 @@ import { Feather } from "@expo/vector-icons"
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DataListProps } from '.';
 import { FlatList } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 
 
 export const Container = styled.View`
@@ -60,6 +61,8 @@ export const UserName = styled.Text`
   font-size: ${RFValue(18)}px;
 `;
 
+export const LogoutButton = styled(BorderlessButton)``;
+
 // Custom a third part component, in this case, a Feather
 export const Icon = styled(Feather)`
   color: ${({theme}) => theme.colors.secondary};
@@ -96,4 +99,5 @@ export const TransactionList = styled(
     paddingBottom: 30
   }
 })``;
+
 
