@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Keyboard,
   Modal,
@@ -22,6 +22,7 @@ import TrasnsactionTypeButton from '../../components/Forms/TransactionTypeButton
 import { CategorySelectButton } from '../../components/Forms/CategorySelectButton'
 import InputForm from '../../components/Forms/InputForm'
 import { useForm } from 'react-hook-form'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface FormData {
   name: string;
@@ -36,6 +37,8 @@ const schema = Yup.object().shape({
   .typeError("Informe um valor numérico")
   .positive("O valor não pode ser negativo")
 })
+
+const dataKey = '@gofinance:transactions'
 
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
@@ -65,12 +68,11 @@ export function Register() {
     setCategoryModalOpen(false)
   }
 
-  function handleRegister(form: FormData){
+  async function handleRegister(form: FormData){
     if (!transactionType)
       return Alert.alert('Selecione o Tipo da transação')
     if (category.key === 'category')
       return Alert.alert('Selecione a categoria')
-
 
     const data = {
       name: form.name,
@@ -79,9 +81,23 @@ export function Register() {
       category: category.key
     }
 
-    console.log(data)
-
+    try {
+      await AsyncStorage.setItem(dataKey, JSON.stringify(data));
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Não foi possível salvar')
+    }
   }
+
+  useEffect(() => {
+    async function loadData(){
+      const data = await AsyncStorage.getItem(dataKey);
+      console.log(JSON.parse(data!))
+    }
+
+    loadData()
+
+  }, [])
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -99,14 +115,14 @@ export function Register() {
               control={control}
               autoCapitalize='sentences'
               autoCorrect={false}
-              error={errors.name && errors.name.message}
+              error={errors.name && errors.name.message.toString()}
             />
             <InputForm
               placeholder='Preço'
               name="amount"
               control={control}
               keyboardType='numeric'
-              error={errors.amount && errors.amount.message}
+              error={errors.amount && errors.amount.message.toString()}
             />
 
             <TransactionsTypes>
