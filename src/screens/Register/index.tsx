@@ -41,8 +41,6 @@ const schema = Yup.object().shape({
   .positive("O valor não pode ser negativo")
 })
 
-const dataKey = '@gofinance:transactions'
-
 export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
@@ -90,6 +88,8 @@ export function Register() {
     }
 
     try {
+      const dataKey = '@gofinance:transactions'
+
       const storageData = await AsyncStorage.getItem(dataKey);
       const currentData = storageData ? JSON.parse(storageData) : []
 

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import {
   Container,
   Header,
@@ -23,40 +25,50 @@ export interface DataListProps extends TransactionCardProps {
 }
 
 export function Dashboard() {
-  const data: DataListProps[] = [{
-      id: '1',
-      type: 'positive',
-      title: 'desenvolvimento de site',
-      amount: 'R$ 12.000,00',
-      category: {
-        name: 'Vendas',
-        icon: 'dollar-sign'
-      },
-      date: "13/04/2023"
-    },
-    {
-      id: '2',
-      type: 'negative',
-      title: 'Hamburger pra galera',
-      amount: 'R$ 1.500,00',
-      category: {
-        name: 'Alimentação',
-        icon: 'coffee'
-      },
-      date: "04/01/2023"
-    },
-    {
-      id: '3',
-      type: 'negative',
-      title: 'Aluguel do apartamento',
-      amount: 'R$ 2.320,00',
-      category: {
-        name: 'Casa',
-        icon: 'shopping-bag'
-      },
-      date: "01/01/2023"
-    }
-  ];
+  const [data, setData] = useState<DataListProps[]>([])
+
+  async function loadTransactions(){
+    const dataKey = '@gofinance:transactions'
+    const response = await AsyncStorage.getItem(dataKey);
+
+    const transactions = response ? JSON.parse(response) : []
+
+    const transactionsFormated: DataListProps[] = transactions.map(
+      (item: DataListProps) => {
+        const amount = Number(item.amount)
+        .toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+
+        const date = Intl.DateTimeFormat('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: '2-digit'
+        }).format(new Date(item.date))
+
+        const type = item.type === 'up' ? 'positive' : 'negative'
+
+        return {
+          id: item.id,
+          name: item.name,
+          amount,
+          type ,
+          category: item.category,
+          date
+        }
+      }
+    );
+
+    setData(transactionsFormated)
+
+  }
+
+  useEffect(() => {
+    loadTransactions()
+    console.log("data")
+
+  }, [])
 
   return (
     <Container>

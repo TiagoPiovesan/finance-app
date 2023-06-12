@@ -1,10 +1,8 @@
 import React from 'react';
 import theme from './src/global/styles/theme';
 import AppLoading from 'expo-app-loading';
-
-import { Dashboard } from './src/screens/Dashboard';
-import { Register } from './src/screens/Register';
-import { CategorySelect } from './src/screens/CategorySelect';
+// import 'intl'
+// import 'intl/locale-data-jsonp/pt-BR'
 
 import { ThemeProvider } from 'styled-components';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
