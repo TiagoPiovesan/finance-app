@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import {
@@ -19,6 +19,7 @@ import {
 } from './styles';
 import { HighlightCard } from '../../components/HighlightCard';
 import { TransactionCard, TransactionCardProps } from '../../components/TransactionCard/index';
+import { useFocusEffect } from '@react-navigation/native';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -47,13 +48,11 @@ export function Dashboard() {
           year: '2-digit'
         }).format(new Date(item.date))
 
-        const type = item.type === 'up' ? 'positive' : 'negative'
-
         return {
           id: item.id,
           name: item.name,
           amount,
-          type ,
+          type: item.type ,
           category: item.category,
           date
         }
@@ -61,14 +60,16 @@ export function Dashboard() {
     );
 
     setData(transactionsFormated)
-
+    console.log(transactionsFormated)
   }
 
   useEffect(() => {
     loadTransactions()
-    console.log("data")
-
   }, [])
+
+  useFocusEffect(useCallback(() => {
+    loadTransactions()
+  }, []))
 
   return (
     <Container>
