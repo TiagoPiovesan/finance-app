@@ -91,7 +91,7 @@ export const Title = styled.Text`
   margin-bottom: 16px;
 `;
 
-export const TransactionList = styled(
+export const TransactionList: DataListProps = styled(
     FlatList as new () => FlatList<DataListProps>
   ).attrs({
   showsVerticalScrollIndicator:false,
@@ -100,4 +100,9 @@ export const TransactionList = styled(
   }
 })``;
 
+export const LoadContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`
 
