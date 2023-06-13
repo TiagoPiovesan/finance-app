@@ -25,17 +25,39 @@ export interface DataListProps extends TransactionCardProps {
   id: string;
 }
 
+interface HighlightProps {
+  amount: string;
+}
+
+interface HighlightData {
+  entries: HighlightProps,
+  expensives: HighlightProps
+  total: HighlightProps
+}
+
 export function Dashboard() {
-  const [data, setData] = useState<DataListProps[]>([])
+  const [transactions, setTransactions] = useState<DataListProps[]>([])
+  const [highlightData, setHighlightData] = useState<HighlightData>({} as HighlightData)
 
   async function loadTransactions(){
     const dataKey = '@gofinance:transactions'
     const response = await AsyncStorage.getItem(dataKey);
-
     const transactions = response ? JSON.parse(response) : []
 
-    const transactionsFormated: DataListProps[] = transactions.map(
+    let entriesTotal = 0;
+    let expensiveTotal = 0;
+
+
+    const transactionsFormated: DataListProps[] = transactions
+      .map(
       (item: DataListProps) => {
+
+        if (item.type === 'positive'){
+          entriesTotal += Number(item.amount)
+        }else{
+          expensiveTotal += Number(item.amount)
+        }
+
         const amount = Number(item.amount)
         .toLocaleString('pt-BR', {
           style: 'currency',
@@ -57,10 +79,32 @@ export function Dashboard() {
           date
         }
       }
-    );
+    )
 
-    setData(transactionsFormated)
-    console.log(transactionsFormated)
+    const total = entriesTotal - expensiveTotal
+
+    setTransactions(transactionsFormated)
+    setHighlightData({
+      entries: {
+        amount: entriesTotal.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+      },
+      expensives: {
+        amount: expensiveTotal.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+      },
+      total: {
+        amount: total.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        })
+      }
+    })
+    console.log(highlightData)
   }
 
   useEffect(() => {
@@ -91,16 +135,16 @@ export function Dashboard() {
       </Header>
 
       <HighlightCards>
-        <HighlightCard type='up' title='Entradas' amount='R$ 17.400,00' lastTransaction='Última entrada em 02/04' />
-        <HighlightCard type='down' title='Saídas' amount='R$ 5.100,00' lastTransaction='Última entrada em 01/04' />
-        <HighlightCard type='total' title='Total' amount='R$ 21.990,00' lastTransaction='02/02 até 02/04' />
+        <HighlightCard type='up' title='Entradas' amount={highlightData.entries.amount} lastTransaction='Última entrada em 02/04' />
+        <HighlightCard type='down' title='Saídas' amount={highlightData.expensives.amount}  lastTransaction='Última entrada em 01/04' />
+        <HighlightCard type='total' title='Total' amount={highlightData.total.amount} lastTransaction='02/02 até 02/04' />
       </HighlightCards>
 
       <Transactions>
         <Title>Listagem</Title>
 
         <TransactionList
-          data={data}
+          data={transactions}
           keyExtractor={item => item.id}
           renderItem={({item}) => <TransactionCard data={item} /> }
         >
