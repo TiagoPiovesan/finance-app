@@ -30,12 +30,27 @@ export interface DataListProps extends TransactionCardProps {
 
 interface HighlightProps {
   amount: string;
+  lastTransaction: string;
 }
 
 interface HighlightData {
   entries: HighlightProps,
   expensives: HighlightProps
   total: HighlightProps
+}
+
+function getLastTransactionDate(collection: DataListProps[], type: 'positive' | 'negative'){
+      // Get by max timestemp
+      const lastTransaction = new Date(
+        Math.max.apply(
+          Math,
+          collection
+          .filter(transaction => transaction.type === type)
+          .map(transaction => new Date(transaction.date).getTime())
+        )
+      )
+
+      return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', {month: 'long'})}`
 }
 
 export function Dashboard() {
@@ -88,25 +103,32 @@ export function Dashboard() {
 
     const total = entriesTotal - expensiveTotal
 
+    const lastTransactionEntries = getLastTransactionDate(transactions, 'positive')
+    const lastTransactionExpensives = getLastTransactionDate(transactions, 'negative')
+    const totalInterval = `01 a ${lastTransactionExpensives}`
+
     setTransactions(transactionsFormated)
     setHighlightData({
       entries: {
         amount: entriesTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
-        })
+        }),
+        lastTransaction: `Última entrada dia ${lastTransactionEntries}`
       },
       expensives: {
         amount: expensiveTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
-        })
+        }),
+        lastTransaction: `Última saída dia ${lastTransactionExpensives}`
       },
       total: {
         amount: total.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
-        })
+        }),
+        lastTransaction: totalInterval
       }
     })
     setIsLoading(false)
@@ -147,9 +169,9 @@ export function Dashboard() {
           </Header>
 
           <HighlightCards>
-            <HighlightCard type='up' title='Entradas' amount={highlightData.entries.amount} lastTransaction='Última entrada em 02/04' />
-            <HighlightCard type='down' title='Saídas' amount={highlightData.expensives.amount}  lastTransaction='Última entrada em 01/04' />
-            <HighlightCard type='total' title='Total' amount={highlightData.total.amount} lastTransaction='02/02 até 02/04' />
+            <HighlightCard type='up' title='Entradas' amount={highlightData.entries.amount} lastTransaction={highlightData.entries.lastTransaction} />
+            <HighlightCard type='down' title='Saídas' amount={highlightData.expensives.amount}  lastTransaction={highlightData.expensives.lastTransaction} />
+            <HighlightCard type='total' title='Total' amount={highlightData.total.amount} lastTransaction={highlightData.total.lastTransaction} />
           </HighlightCards>
 
           <Transactions>
