@@ -23,6 +23,7 @@ import { categories } from "../../utils/categories";
 import { useFocusEffect } from "@react-navigation/native";
 import { LoadContainer } from "../Dashboard/styles";
 import { ActivityIndicator } from "react-native";
+import { EmptyList } from "../../components/EmptyList";
 
 
 interface TransactionData {
@@ -148,32 +149,39 @@ export function Resume() {
             </MonthSelectButton>
           </MonthSelect>
 
-          <ChartContainer>
-            <VictoryPie
-              data={totalByCategories}
-              x={"percentFormatted"}
-              y={"total"}
-              colorScale={totalByCategories.map(category => category.color)}
-              style={{
-                labels: {
-                  fontSize: RFValue(18),
-                  fontWeight: 'bold',
-                  fill: theme.colors.shape
-                }
-              }}
-              labelRadius={50}
-            />
-          </ChartContainer>
-
           {
-            totalByCategories.map(item => (
-              <HistoryCard
-                key={item.id}
-                title={item.name}
-                amount={item.totalFormatted}
-                color={item.color}
-              />
-            ))
+            totalByCategories.length === 0 ?
+              <EmptyList title="Sem registros" />
+            :
+            <>
+              <ChartContainer>
+                <VictoryPie
+                  data={totalByCategories}
+                  x={"percentFormatted"}
+                  y={"total"}
+                  colorScale={totalByCategories.map(category => category.color)}
+                  style={{
+                    labels: {
+                      fontSize: RFValue(18),
+                      fontWeight: 'bold',
+                      fill: theme.colors.shape
+                    }
+                  }}
+                  labelRadius={50}
+                />
+              </ChartContainer>
+
+              {
+                totalByCategories.map(item => (
+                  <HistoryCard
+                    key={item.id}
+                    title={item.name}
+                    amount={item.totalFormatted}
+                    color={item.color}
+                  />
+                ))
+              }
+            </>
           }
 
         </Content>

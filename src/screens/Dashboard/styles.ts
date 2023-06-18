@@ -96,13 +96,13 @@ export const TransactionList: DataListProps = styled(
   ).attrs({
   showsVerticalScrollIndicator:false,
   contentContainerStyle: {
-    paddingBottom: 30
+    paddingBottom: 30,
   }
-})``;
+})`
+`;
 
 export const LoadContainer = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
 `
-

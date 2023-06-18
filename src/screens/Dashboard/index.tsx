@@ -23,6 +23,7 @@ import { TransactionCard, TransactionCardProps } from '../../components/Transact
 import { useFocusEffect } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import { useTheme } from 'styled-components/native';
+import { EmptyList } from '../../components/EmptyList';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -107,6 +108,7 @@ export function Dashboard() {
     const lastTransactionExpensives = getLastTransactionDate(transactions, 'negative')
     const totalInterval = `01 a ${lastTransactionExpensives}`
 
+    console.log(lastTransactionEntries)
     setTransactions(transactionsFormated)
     setHighlightData({
       entries: {
@@ -114,21 +116,21 @@ export function Dashboard() {
           style: 'currency',
           currency: 'BRL'
         }),
-        lastTransaction: `Última entrada dia ${lastTransactionEntries}`
+        lastTransaction: lastTransactionEntries.includes('Nan') ? `Última entrada dia ${lastTransactionEntries}` : 'Sem registros'
       },
       expensives: {
         amount: expensiveTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
         }),
-        lastTransaction: `Última saída dia ${lastTransactionExpensives}`
+        lastTransaction: lastTransactionExpensives.includes('Nan') ? `Última saída dia ${lastTransactionExpensives}` : 'Sem registros'
       },
       total: {
         amount: total.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
         }),
-        lastTransaction: totalInterval
+        lastTransaction: totalInterval.includes('Nan') ? totalInterval : 'Sem registros'
       }
     })
     setIsLoading(false)
@@ -181,8 +183,11 @@ export function Dashboard() {
               data={transactions}
               keyExtractor={item => item.id}
               renderItem={({item}) => <TransactionCard data={item} /> }
-            >
-            </TransactionList>
+
+              ListHeaderComponent={() => (!transactions.length ?
+                <EmptyList title="Sem registros" />
+                : null)}
+            />
           </Transactions>
         </>
       }
