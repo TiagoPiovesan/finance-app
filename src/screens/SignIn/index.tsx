@@ -14,20 +14,20 @@ import {
   FooterWrapper
 } from './styles'
 import { SignInSocialButton } from '../../components/SignInSocialButton'
-import { AuthContext } from '../../AuthContext'
+import { useAuth } from '../../hook/auth'
 
 
 export default function SignIn() {
-  const data = useContext(AuthContext);
-  console.log(data)
+  const { user } = useAuth()
+  console.log(user)
 
   return (
     <Container>
       <Header>
         <TitleWrapper>
           <LogoSvg
-            width={RFValue=(200)}
-            height={RFValue=(120)}
+            width={RFValue(200)}
+            height={RFValue(120)}
           />
 
         <Title>

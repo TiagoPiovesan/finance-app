@@ -1,8 +1,6 @@
 import React from 'react';
 import theme from './src/global/styles/theme';
 import AppLoading from 'expo-app-loading';
-// import 'intl'
-// import 'intl/locale-data-jsonp/pt-BR'
 
 import { ThemeProvider } from 'styled-components';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -16,7 +14,7 @@ import {
 import { AppRoutes } from './src/routes/app.routes';
 import { NavigationContainer } from '@react-navigation/native';
 import SignIn from './src/screens/SignIn';
-import { AuthContext } from './src/AuthContext';
+import { AuthProvider } from './src/hook/auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -33,9 +31,9 @@ export default function App() {
     <ThemeProvider theme={ theme }>
       <NavigationContainer>
         <SafeAreaProvider >
-          <AuthContext.Provider value={['tiago']}>
+          <AuthProvider>
             <SignIn/>
-          </AuthContext.Provider>
+          </AuthProvider>
         </SafeAreaProvider>
       </NavigationContainer>
     </ThemeProvider>
