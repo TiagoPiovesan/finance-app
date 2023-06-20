@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import AppeSvg from '../../assets/apple.svg'
 import LogoSvg from '../../assets/logo-full.svg'
 import GoogleSvg from '../../assets/google.svg'
@@ -14,9 +14,13 @@ import {
   FooterWrapper
 } from './styles'
 import { SignInSocialButton } from '../../components/SignInSocialButton'
+import { AuthContext } from '../../AuthContext'
 
 
 export default function SignIn() {
+  const data = useContext(AuthContext);
+  console.log(data)
+
   return (
     <Container>
       <Header>

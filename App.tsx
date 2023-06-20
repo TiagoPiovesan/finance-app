@@ -16,6 +16,7 @@ import {
 import { AppRoutes } from './src/routes/app.routes';
 import { NavigationContainer } from '@react-navigation/native';
 import SignIn from './src/screens/SignIn';
+import { AuthContext } from './src/AuthContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -32,7 +33,9 @@ export default function App() {
     <ThemeProvider theme={ theme }>
       <NavigationContainer>
         <SafeAreaProvider >
-          < SignIn />
+          <AuthContext.Provider value={['tiago']}>
+            <SignIn/>
+          </AuthContext.Provider>
         </SafeAreaProvider>
       </NavigationContainer>
     </ThemeProvider>
