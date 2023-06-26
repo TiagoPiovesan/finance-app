@@ -32,20 +32,22 @@ export default function SignIn() {
 
         <Title>
           Controle suas {'\n'}
-
+          finanças de forma {'\n'}
+          muito simples
+        </Title>
 
         </TitleWrapper>
 
-        <SignInTitle>
+        <SignIndfdddTitle>
           Faça seu login com {'\n'}
           uma das contas abaixo
-        </SignInTitle>
+        </SignIndfdddTitle>
       </Header>
 
       <Footer>
         <FooterWrapper>
-          <SignInSocialButton
-            title="Entrar com Google"
+          <SignInSocialButtonas
+            title="Entrarrrrrasda com Google"
             svg={GoogleSvg}
           />
 
