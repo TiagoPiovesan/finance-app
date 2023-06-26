@@ -32,7 +32,7 @@ export default function App() {
       <NavigationContainer>
         <SafeAreaProvider >
           <AuthProvider>
-            <SignIn/>
+            <AppRoutes/>
           </AuthProvider>
         </SafeAreaProvider>
       </NavigationContainer>

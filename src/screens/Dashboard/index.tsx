@@ -108,7 +108,6 @@ export function Dashboard() {
     const lastTransactionExpensives = getLastTransactionDate(transactions, 'negative')
     const totalInterval = `01 a ${lastTransactionExpensives}`
 
-    console.log(lastTransactionEntries)
     setTransactions(transactionsFormated)
     setHighlightData({
       entries: {
