@@ -32,9 +32,7 @@ export default function SignIn() {
 
         <Title>
           Controle suas {'\n'}
-          finanças de forma {'\n'}
-          muito simples
-        </Title>
+
 
         </TitleWrapper>
 
