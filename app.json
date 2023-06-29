@@ -1,5 +1,16 @@
 {
   "expo": {
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "package": "com.tiagopiovesan.gofinance"
+    },
+    "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "bundleIdentifier": "com.tiagopiovesan.gofinance"
+    },
+    "plugins": [
+      "@react-native-google-signin/google-signin"
+    ],
     "name": "gofinance",
     "slug": "gofinance",
     "version": "1.0.0",

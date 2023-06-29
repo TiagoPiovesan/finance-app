@@ -1,4 +1,4 @@
-package com.gofinance;
+package com.tiagopiovesan.gofinance;
 
 import android.app.Application;
 import android.content.res.Configuration;

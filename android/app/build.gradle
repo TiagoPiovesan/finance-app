@@ -113,13 +113,14 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.gofinance"
+    namespace 'com.tiagopiovesan.gofinance'
     defaultConfig {
-        applicationId "com.gofinance"
+        manifestPlaceholders = [appAuthRedirectScheme: 'dev.expo.app']
+        applicationId 'com.tiagopiovesan.gofinance'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
 
     splits {
@@ -235,3 +236,5 @@ dependencies {
 
 apply from: new File(["node", "--print", "require.resolve('@react-native-community/cli-platform-android/package.json')"].execute(null, rootDir).text.trim(), "../native_modules.gradle");
 applyNativeModulesAppBuildGradle(project)
+
+apply plugin: 'com.google.gms.google-services'
