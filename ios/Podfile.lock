@@ -24,6 +24,8 @@ PODS:
     - ExpoModulesCore
     - GoogleSignIn (~> 7.0)
     - React-Core
+  - ExpoAppleAuthentication (6.0.1):
+    - ExpoModulesCore
   - ExpoKeepAwake (12.0.1):
     - ExpoModulesCore
   - ExpoModulesCore (1.2.7):
@@ -420,6 +422,7 @@ DEPENDENCIES:
   - EXFont (from `../node_modules/expo-font/ios`)
   - Expo (from `../node_modules/expo`)
   - "ExpoAdapterGoogleSignIn (from `../node_modules/@react-native-google-signin/google-signin/expo/ios`)"
+  - ExpoAppleAuthentication (from `../node_modules/expo-apple-authentication/ios`)
   - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
@@ -492,6 +495,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo"
   ExpoAdapterGoogleSignIn:
     :path: "../node_modules/@react-native-google-signin/google-signin/expo/ios"
+  ExpoAppleAuthentication:
+    :path: "../node_modules/expo-apple-authentication/ios"
   ExpoKeepAwake:
     :path: "../node_modules/expo-keep-awake/ios"
   ExpoModulesCore:
@@ -586,6 +591,7 @@ SPEC CHECKSUMS:
   EXFont: 6ea3800df746be7233208d80fe379b8ed74f4272
   Expo: 8448e3a2aa1b295f029c81551e1ab6d986517fdb
   ExpoAdapterGoogleSignIn: b6e7ca3d25261737d31c274460b503ff1b6cb303
+  ExpoAppleAuthentication: 7bd5e4150d59e8df37aa80b425850ae88adf9e65
   ExpoKeepAwake: 69f5f627670d62318410392d03e0b5db0f85759a
   ExpoModulesCore: 653958063a301098b541ae4dfed1ac0b98db607b
   EXSplashScreen: 0e0a9ba0cf7553094e93213099bd7b42e6e237e9
