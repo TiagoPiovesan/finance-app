@@ -61,16 +61,16 @@ export default function SignIn() {
 
         </TitleWrapper>
 
-        <SignInTitle>
+        <SignIndfdddTitle>
           Faça seu login com {'\n'}
           uma das contas abaixo
-        </SignInTitle>
+        </SignIndfdddTitle>
       </Header>
 
       <Footer>
         <FooterWrapper>
-          <SignInSocialButton
-            title="Entrar com Google"
+          <SignInSocialButtonas
+            title="Entrarrrrrasda com Google"
             svg={GoogleSvg}
             onPress={handleSignInButton}
           />
