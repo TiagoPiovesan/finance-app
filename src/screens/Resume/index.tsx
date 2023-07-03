@@ -24,6 +24,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { LoadContainer } from "../Dashboard/styles";
 import { ActivityIndicator } from "react-native";
 import { EmptyList } from "../../components/EmptyList";
+import { useAuth } from "../../hook/auth";
 
 
 interface TransactionData {
@@ -50,6 +51,8 @@ export function Resume() {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([])
 
+  const { user } = useAuth()
+
   const theme = useTheme()
 
   function handleDateChange(action: 'next' | 'prev'){
@@ -62,7 +65,7 @@ export function Resume() {
 
   async function loadData() {
     setIsLoading(true)
-    const dataKey = '@gofinance:transactions'
+    const dataKey = `@gofinance:transactions_user:${user.id}`
     const response = await AsyncStorage.getItem(dataKey);
     const responseFormatted = response ? JSON.parse(response) : []
 

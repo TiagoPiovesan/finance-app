@@ -348,10 +348,10 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tiagopiovesan.gofinance;
-				PRODUCT_NAME = gofinance;
+				PRODUCT_NAME = "gofinance";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1";
 				VERSIONING_SYSTEM = "apple-generic";
 				DEVELOPMENT_TEAM = "EK5Y6FK224";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -378,9 +378,9 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tiagopiovesan.gofinance;
-				PRODUCT_NAME = gofinance;
+				PRODUCT_NAME = "gofinance";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1";
 				VERSIONING_SYSTEM = "apple-generic";
 				DEVELOPMENT_TEAM = "EK5Y6FK224";
 				CODE_SIGN_IDENTITY = "Apple Development";
