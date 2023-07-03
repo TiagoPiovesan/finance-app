@@ -12,7 +12,7 @@ import {
   Poppins_700Bold
 } from '@expo-google-fonts/poppins';
 import SignIn from './src/screens/SignIn';
-import { AuthProvider } from './src/hook/auth';
+import { AuthProvider, useAuth } from './src/hook/auth';
 import { Routes } from './src/routes';
 
 export default function App() {
@@ -22,7 +22,9 @@ export default function App() {
     Poppins_700Bold
   })
 
-  if(!fontsLoaded) {
+  const { userStorageLoadding } = useAuth()
+
+  if(!fontsLoaded || userStorageLoadding) {
     return <AppLoading />
   }
 

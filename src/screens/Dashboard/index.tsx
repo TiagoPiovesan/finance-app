@@ -24,6 +24,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { EmptyList } from '../../components/EmptyList';
+import { useAuth } from '../../hook/auth';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -41,17 +42,17 @@ interface HighlightData {
 }
 
 function getLastTransactionDate(collection: DataListProps[], type: 'positive' | 'negative'){
-      // Get by max timestemp
-      const lastTransaction = new Date(
-        Math.max.apply(
-          Math,
-          collection
-          .filter(transaction => transaction.type === type)
-          .map(transaction => new Date(transaction.date).getTime())
-        )
+    // Get by max timestemp
+    const lastTransaction = new Date(
+      Math.max.apply(
+        Math,
+        collection
+        .filter(transaction => transaction.type === type)
+        .map(transaction => new Date(transaction.date).getTime())
       )
+    )
 
-      return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', {month: 'long'})}`
+    return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', {month: 'long'})}`
 }
 
 export function Dashboard() {
@@ -60,6 +61,7 @@ export function Dashboard() {
   const [highlightData, setHighlightData] = useState<HighlightData>({} as HighlightData)
 
   const theme = useTheme()
+  const { user, signOut } = useAuth()
 
   async function loadTransactions(){
     const dataKey = '@gofinance:transactions'
@@ -155,14 +157,14 @@ export function Dashboard() {
           <Header>
             <UserWrapper>
               <UserInfo>
-                <Photo source={{ uri: "https://avatars.githubusercontent.com/u/20112017" }} />
+                <Photo source={{ uri: user.photo }} />
                 <User>
                   <UserGreeting>Olá, </UserGreeting>
-                  <UserName>Tiago</UserName>
+                  <UserName>{ user.name }</UserName>
                 </User>
               </UserInfo>
 
-              <LogoutButton onPress={() => {}}>
+              <LogoutButton onPress={signOut}>
                 <Icon name="power" />
               </LogoutButton>
 
