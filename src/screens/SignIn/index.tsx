@@ -15,7 +15,7 @@ import {
 } from './styles'
 import { SignInSocialButton } from '../../components/SignInSocialButton'
 import { useAuth } from '../../hook/auth'
-import { ActivityIndicator, Alert } from 'react-native'
+import { ActivityIndicator, Alert, Platform } from 'react-native'
 import { useTheme } from 'styled-components'
 
 
@@ -32,17 +32,14 @@ export default function SignIn() {
     }catch (error) {
       console.log(error)
       Alert.alert('Não foi possível conectar a conta Google')
-    } finally {
       setIsLoadding(false)
     }
-
     try {
       setIsLoadding(true)
       return await signInWithApple();
     }catch (error) {
       console.log(error)
       Alert.alert('Não foi possível conectar a conta Apple')
-    } finally {
       setIsLoadding(false)
     }
   }
@@ -78,11 +75,13 @@ export default function SignIn() {
             onPress={handleSignInButton}
           />
 
+        { Platform.OS === 'ios' &&
           <SignInSocialButton
             title="Entrar com Apple"
             svg={AppeSvg}
             onPress={signInWithApple}
           />
+        }
         </FooterWrapper>
 
         { isLoadding && <ActivityIndicator
