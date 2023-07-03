@@ -1,4 +1,6 @@
 
+https://drive.google.com/file/d/1uapXcneFAfx-PE_oz6xEdOhnZPw4Vx_9/view?usp=sharing
+
 # Project Study React Native
 The application is a mobile app designed to help individuals track and manage their personal finances by recording income and expenses. It provides a convenient and intuitive way for users to monitor their financial transactions, allowing them to gain better control over their money and make informed decisions about their spending habits. With features for categorizing transactions, setting budgets, and generating financial reports, this app aims to empower individuals to achieve their financial goals and improve their overall financial well-being.
 
